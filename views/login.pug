@@ -1,0 +1,25 @@
+extends base
+
+block content
+  main.main.main--align-middle#main-login
+    .container.container--form
+      h2.title.title-2 Login
+      form.form.form--login#register-form(action="/ap/v1/auth/login", autocomplete="off")
+        .form__inputs
+          .form__group
+            label.form__label(for="email") Email
+            input.form__input#email(type="email" autofocus required)
+          .form__group
+            label.form__label(for="password") Password
+            input.form__input#password(type="password" required)
+          .form__group
+            button.btn.btn--green#submit-login-btn Login
+
+      a.btn.btn--red(href="/api/v1/auth/google")
+        i.fab.fa-google Login with google
+
+      p.form__change Dont' have an account?
+        a(href="/register") Sign up.
+
+
+

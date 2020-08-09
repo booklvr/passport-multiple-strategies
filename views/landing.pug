@@ -1,0 +1,24 @@
+extends base
+
+block content
+  main.main.main--align-middle
+
+  +title-1('Passport - Multiple strategies')
+
+  .container.container--paragraph
+    p Passport Multiple Strategies Login and Register
+
+  .container.container--cta
+    ul.cta
+      if user 
+        li.cta__button
+          a(href="/classroom") Classes
+        li.cta__button
+          a(href="/api/v1/auth/logout") Logout
+      else 
+        li.cta__button
+          a(href="/login") Login
+        li.cta__button
+          a(href="/register") SignUp
+
+

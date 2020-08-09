@@ -1,0 +1,38 @@
+extends base
+
+block content
+  main.main.main--align-middle#main-register
+    .container.container--form
+      h2.title.title-2 Register
+      form#form-register.form.form--register(autocomplete = 'off')
+
+        .form__group
+          .form__control
+            label.form__label(for="firstName") First name
+            input.form__input#first-name(type="text" autofocus required)
+          .form__control
+            label.form__label(for="lastName") Last name
+            input.form__input#last-name(type="text" required)
+          .form__control
+            label.form__label(for="displayName") Display name
+            input.form__input#display-name(type="text" required)
+
+
+        .form__group
+          .form__control
+            label.form__label(for="email") Email
+            input.form__input#email(type="email" required)
+          .form__control
+            label.form__label(for="password") Password
+            input.form__input#password(type="password" required)
+          .form__control
+            label.form__label(for="confirm-password") Confirm password
+            input.form__input#password-confirm(type="password" required)
+        .form__group
+          button.btn.btn--green#submit-register-btn(type="submit") Sign Up 
+
+    a.btn.btn--red(href="/api/v1/auth/google")
+      i.fab.fa-gooogle Sign Up With Google
+
+    p.form__change Already have an account?
+      a(href="/login")  Login 

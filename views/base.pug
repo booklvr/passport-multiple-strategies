@@ -1,0 +1,26 @@
+doctype html
+include ./partials/_mixins
+html(lang="en")
+  head
+    block head
+      meta(charset="UTF-8")
+      meta(name="viewport", content="width=device-width, initial-scale=1.0")
+      base(href="/")
+      link(rel="icon", href="#")
+      link(rel="stylesheet", href="https://cdn.rawgit.com/mfd/09b70eb47474836f25a21660282ce0fd/raw/e06a670afcb2b861ed2ac4a1ef752d062ef6b46b/Gilroy.css")
+      link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css")
+      link(rel='stylesheet' href='/css/style.css')
+      title Class Point | #{title}
+
+  body
+    // HEADER
+    include ./partials/_header
+
+    // CONTENT
+    block content
+      //- h1 This is a placeholder heading
+
+    // FOOTER
+    //- include ./partials/_footer
+
+    script(src='/js/bundle.js')
