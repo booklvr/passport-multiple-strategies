@@ -13,7 +13,7 @@ exports.ensureAuth = (req, res, next) => {
   if (req.isAuthenticated()) {
     console.log(req);
     console.log('is authenticated');
-    return next();
+    next();
   } else {
     console.log('is not authenticated');
     console.log('fuck you try and login again');

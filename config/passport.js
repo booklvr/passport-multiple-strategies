@@ -48,12 +48,13 @@ module.exports = function (passport) {
 
   passport.serializeUser((user, done) => {
     console.log('serializing this mother fucker');
+    console.log('user', user);
     done(null, user.id);
   });
 
   passport.deserializeUser((id, done) => {
     console.log('deserializing this bitch');
     // User.findById(id, (err, user) => done(err, user));
-    done(null, id);
+    User.findById(id, (err, user) => done(null, user));
   });
 };

@@ -5,7 +5,8 @@ const dotenv = require('dotenv');
 const passport = require('passport');
 const session = require('express-session');
 const morgan = require('morgan');
-// const cookieParser = require('cookie-parser');
+const cors = require('cors');
+const cookieParser = require('cookie-parser');
 const MongoStore = require('connect-mongo')(session);
 
 // LOAD CONFIG
@@ -32,7 +33,7 @@ app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 
 // COOKIE PARSER
-// app.use(cookieParser());
+app.use(cookieParser());
 // BODY PARSER
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
@@ -48,16 +49,30 @@ app.use(
     secret: 'keyboardcat',
     resave: false,
     saveUninitialized: false,
-    // store: new MongoStore({
-    //   url: process.env.MONGO_URL,
-    //   collection: 'sessions',
-    // }),
+    cookie: { secure: false, maxAge: 4 * 60 * 60 * 1000 },
+    store: new MongoStore({ mongooseConnection: mongoose.connection }),
   })
 );
 
+console.log('mongoose.connection', mongoose.connection);
 // Passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
+
+// Implement CORS
+// Access-Control-Allow-Origin header
+app.use(cors({ credentials: true, origin: true }));
+app.options('*', cors());
+// app.use((req, res, next) => {
+//   res.header('Access-Control-Allow-Origin', 'http://localhost:4200');
+//   res.header(
+//     'Access-Control-Allow-Headers',
+//     'Origin, X-Requested-With, X-AUTHENTICATION, X-IP, Content-Type, Accept'
+//   );
+//   res.header('Access-Control-Allow-Credentials', true);
+//   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+//   next();
+// });
 
 // ROUTE HANDLERS
 const viewRouter = require('./routes/viewRouter');

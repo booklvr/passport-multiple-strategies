@@ -27,42 +27,34 @@ router.get('/google', passport.authenticate('google', { scope: ['profile'] }));
 //     successRedirect: '../../../../my-classrooms',
 //   })
 // );
-router.get(
-  '/google/callback',
-  passport.authenticate('google', {
-    failureRedirect: '/',
-  }),
-  (req, res) => {
-    console.log('GOOGLE CALLBACK');
-    console.log('session', req.session.passport.user);
-    console.log('req.isAuthenticated', req.isAuthenticated());
-    console.log('req.isAuthenticated2', req.isAuthenticated());
-
-    req.session.save(() => {
-      console.log('session', req.session);
-      console.log('try redirecting');
-      res.redirect('/profile');
-    });
-  }
-);
-
-// const redirects = {
-//   successRedirect: '/profile',
-//   failureRedirect: '/login',
-// };
 
 // router.get(
 //   '/google/callback',
-//   passport.authenticate('google', redirects),
-//   function (req, res) {
-//     console.log('FUCK FUCK FUCK FUCK FUCK');
-//     // Explicitly save the session before redirecting!
-//     console.log(req.session);
-//     req.session.save(() => {
-//       res.redirect('/profile');
-//     });
+//   passport.authenticate('google', {
+//     failureRedirect: '/',
+//   }),
+//   (req, res) => {
+//     console.log('req.user', req.user);
+//     console.log('req.body.user', req.body.user);
+//     console.dir('Req body: ', JSON.stringify(req.body));
+//     console.log('\n\nReq session: ', JSON.stringify(req.session));
+//     res.redirect('/');
+
+//     // req.session.save(() => {
+//     //   console.log('session', req.session);
+//     //   console.log('try redirecting');
+//     //   res.render('profile');
+//     // });
 //   }
 // );
+
+router.get(
+  '/google/callback',
+  passport.authenticate('google', { failureRedirect: '/' }),
+  (req, res) => {
+    res.redirect('/profile');
+  }
+);
 
 // router.post(
 //   '/login',
