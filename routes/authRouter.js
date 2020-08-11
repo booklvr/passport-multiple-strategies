@@ -29,12 +29,40 @@ router.get('/google', passport.authenticate('google', { scope: ['profile'] }));
 // );
 router.get(
   '/google/callback',
-  passport.authenticate('google', { failureRedirect: '/' }),
+  passport.authenticate('google', {
+    failureRedirect: '/',
+  }),
   (req, res) => {
-    console.log('made it to this redirect');
-    res.redirect('/');
+    console.log('GOOGLE CALLBACK');
+    console.log('session', req.session.passport.user);
+    console.log('req.isAuthenticated', req.isAuthenticated());
+    console.log('req.isAuthenticated2', req.isAuthenticated());
+
+    req.session.save(() => {
+      console.log('session', req.session);
+      console.log('try redirecting');
+      res.redirect('/profile');
+    });
   }
 );
+
+// const redirects = {
+//   successRedirect: '/profile',
+//   failureRedirect: '/login',
+// };
+
+// router.get(
+//   '/google/callback',
+//   passport.authenticate('google', redirects),
+//   function (req, res) {
+//     console.log('FUCK FUCK FUCK FUCK FUCK');
+//     // Explicitly save the session before redirecting!
+//     console.log(req.session);
+//     req.session.save(() => {
+//       res.redirect('/profile');
+//     });
+//   }
+// );
 
 // router.post(
 //   '/login',

@@ -15,3 +15,9 @@ exports.getRegisterForm = (req, res) => {
     title: 'Register an account',
   });
 };
+
+exports.getProfile = (req, res) => {
+  res.status(200).render('profile', {
+    title: 'Profile',
+  });
+};

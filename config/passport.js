@@ -19,16 +19,27 @@ module.exports = function (passport) {
           image: profile.photos[0].value,
         };
 
+        console.log('YOU ARE IN THE PASSPORT GOOGLE STRATEGY');
+        console.log(
+          'Our user authenticated with Google, and Google sent us back this profile info identifying the authenticated user:',
+          profile
+        );
+
         try {
           let user = await User.findOne({ googleId: profile.id });
 
           if (user) {
+            console.log('found your fucking user');
             done(null, user);
           } else {
+            console.log("couldn't find a damn person!!!");
             user = await User.create(newUser);
             done(null, user);
           }
         } catch (err) {
+          console.log(
+            'fucking error in in the try catch section of the google strategy'
+          );
           console.error(err);
         }
       }
@@ -36,10 +47,13 @@ module.exports = function (passport) {
   );
 
   passport.serializeUser((user, done) => {
+    console.log('serializing this mother fucker');
     done(null, user.id);
   });
 
   passport.deserializeUser((id, done) => {
-    User.findById(id, (err, user) => done(err, user));
+    console.log('deserializing this bitch');
+    // User.findById(id, (err, user) => done(err, user));
+    done(null, id);
   });
 };
