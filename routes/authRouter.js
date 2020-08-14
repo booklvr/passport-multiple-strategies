@@ -16,7 +16,15 @@ const router = express.Router();
 // );
 
 // this version has no email :(
-router.get('/google', passport.authenticate('google', { scope: ['profile'] }));
+router.get(
+  '/google',
+  passport.authenticate('google', {
+    scope: [
+      'https://www.googleapis.com/auth/userinfo.profile',
+      'https://www.googleapis.com/auth/userinfo.email',
+    ],
+  })
+);
 
 // @desc Google Auth Callback
 // @route GET api/v1/auth/google

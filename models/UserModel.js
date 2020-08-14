@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const passportLocalMongoose = require('passport-local-mongoose');
 const validator = require('validator');
 
 const UserSchema = new mongoose.Schema(
@@ -6,7 +7,7 @@ const UserSchema = new mongoose.Schema(
     googleId: {
       type: String,
       required: true,
-    }, 
+    },
     displayName: {
       type: String,
       required: true,
@@ -34,5 +35,7 @@ const UserSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
+
+UserSchema.plugin(passportLocalMongoose, { usernameField: 'email' });
 
 module.exports = mongoose.model('User', UserSchema);

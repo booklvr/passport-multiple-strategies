@@ -2,12 +2,9 @@
 header.header
   nav.nav
     .container.container--navbar
-      a#nav__brand.nav__brand(href="/") Class 
-        span.text-secondary Point
+      a#nav__brand.nav__brand(href="/api/v1/auth/login") Passport Multiple Strategies
       ul.nav_el
         if user 
-          li.nav__el.nav__el--cta
-            a(href="/my-classrooms") Classes
           li.nav__el.nav__el--cta-logout
             a(href="/api/v1/auth/logout") Logout
           li.nav__el.nav__el--profile

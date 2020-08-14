@@ -17,6 +17,7 @@ module.exports = function (passport) {
           firstName: profile.name.givenName,
           lastName: profile.name.familyName,
           image: profile.photos[0].value,
+          email: profile.emails[0].value,
         };
 
         console.log('YOU ARE IN THE PASSPORT GOOGLE STRATEGY');
@@ -46,15 +47,17 @@ module.exports = function (passport) {
     )
   );
 
+  // with works with passport-local-mongoose
+  // * need User.createStrategy because we change username field to email
+  passport.use(User.createStrategy());
+
   passport.serializeUser((user, done) => {
-    console.log('serializing this mother fucker');
-    console.log('user', user);
+    console.log('serializing...');
     done(null, user.id);
   });
 
   passport.deserializeUser((id, done) => {
-    console.log('deserializing this bitch');
-    // User.findById(id, (err, user) => done(err, user));
+    console.log('deserializing...');
     User.findById(id, (err, user) => done(null, user));
   });
 };

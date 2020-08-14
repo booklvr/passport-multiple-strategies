@@ -8,15 +8,14 @@ const router = express.Router();
 // MIDDLEWARE
 exports.ensureAuth = (req, res, next) => {
   console.log('ENSURE AUTH MIDDLEWARE');
-  console.log('session', req.session);
+
   // console.log('req.isAuthenticated', req.isAuthenticated());
   if (req.isAuthenticated()) {
-    console.log(req);
-    console.log('is authenticated');
+    console.log('USER AUTHENTICATED');
+    res.locals.user = req.user;
     next();
   } else {
-    console.log('is not authenticated');
-    console.log('fuck you try and login again');
+    console.log('NOT AUTHENTICATED');
     res.redirect('/login');
     // res.status(401).json('not authenticated');
   }

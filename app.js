@@ -6,7 +6,6 @@ const passport = require('passport');
 const session = require('express-session');
 const morgan = require('morgan');
 const cors = require('cors');
-const cookieParser = require('cookie-parser');
 const MongoStore = require('connect-mongo')(session);
 
 // LOAD CONFIG
@@ -32,17 +31,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 
-// COOKIE PARSER
-app.use(cookieParser());
 // BODY PARSER
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Logging
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
-
 // SESSION
 app.use(
   session({
@@ -54,7 +50,6 @@ app.use(
   })
 );
 
-console.log('mongoose.connection', mongoose.connection);
 // Passport middleware
 app.use(passport.initialize());
 app.use(passport.session());

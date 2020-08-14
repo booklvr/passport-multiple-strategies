@@ -3,11 +3,14 @@ extends base
 block content
   main.main.main--align-middle#main-profile
 
-   +title-1('User Profile')
+    +title-1('User Profile')
 
-  //-  ul
-  //-   li= `firstname: ${user.firstName}`
-  //-   li= `lastname: ${user.lastName}`
-  //-   li= `email: ${user.email}`
-  //-   li= `name: ${user.name}`
-  //-   li= `name: ${user.name}`
+    ul
+      li= `firstname: ${user.firstName}`
+      li= `lastname: ${user.lastName}`
+      li= `displayname: ${user.displayName}`
+      li= `email: ${user.email}`
+      li
+        img(src=`${user.image}`)
+      //- li= `email: ${user.email}`
+
